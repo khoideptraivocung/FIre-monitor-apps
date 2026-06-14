@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "595943829773",
+    "firebase_url": "https://finalproject-3f736-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "finalproject-3f736",
+    "storage_bucket": "finalproject-3f736.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595943829773:android:8bc5fa30d1eff739db0044",
+        "android_client_info": {
+          "package_name": "com.example.fire_monitor_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8tZgHP94Rpgjc-z1QpsmU0q9dgdgV3gc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
