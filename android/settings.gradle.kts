@@ -23,7 +23,9 @@ plugins {
     // START: FlutterFire Configuration
     id("com.google.gms.google-services") version("4.4.4") apply false
     // END: FlutterFire Configuration
-    id("org.jetbrains.kotlin.android") version "2.3.20" apply false
+
+    // ĐÃ SỬA: Thay dấu cách bằng dấu ngoặc đơn () và nâng lên 2.2.20
+    id("org.jetbrains.kotlin.android") version "2.2.20" apply false
 }
 
 include(":app")

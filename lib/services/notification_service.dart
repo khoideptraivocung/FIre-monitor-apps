@@ -33,6 +33,14 @@ class NotificationService {
         // Handle notification click if needed
       },
     );
+
+    // Request permissions for Android 13+
+    final androidImplementation =
+        _notificationsPlugin.resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>();
+    if (androidImplementation != null) {
+      await androidImplementation.requestNotificationsPermission();
+    }
   }
 
   /// Show standard notification alert

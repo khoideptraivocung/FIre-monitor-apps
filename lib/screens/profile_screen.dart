@@ -133,7 +133,7 @@ class ProfileScreen extends StatelessWidget {
                 _buildSpecItem(context, 'Temperature/Humidity', 'DHT11 Thermosensor', Icons.thermostat_rounded),
                 _buildSpecItem(context, 'Gas/Smoke Sensor', 'MQ135 Air Quality Sensor', Icons.air_rounded),
                 _buildSpecItem(context, 'Flame Detector', 'Infrared Optical Flame Sensor', Icons.local_fire_department_rounded),
-                _buildSpecItem(context, 'Actuators', '5V Exhaust Ventilation Fan & Active Buzzer Alarm', Icons.toys_rounded),
+                _buildSpecItem(context, 'Actuators', '5V Exhaust Ventilation Fan & Active Buzzer Alarm', Icons.cyclone_rounded),
                 _buildSpecItem(context, 'Cloud Integrations', 'Firebase Auth, Database & Functions', Icons.cloud_done_rounded),
                 const SizedBox(height: 12),
                 const Divider(),

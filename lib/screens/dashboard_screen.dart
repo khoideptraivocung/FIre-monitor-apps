@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 import '../providers/monitoring_provider.dart';
 import '../widgets/sensor_card.dart';
 import '../widgets/status_banner.dart';
@@ -25,6 +26,9 @@ class DashboardScreen extends StatelessWidget {
                 children: [
                   // Overall state indicator
                   _buildSystemStatusBanner(monitoring),
+                  const SizedBox(height: 12),
+                  // Last Update Time Indicator
+                  _buildLastUpdateTime(context, monitoring),
                   const SizedBox(height: 24),
                   // Sensors Section header
                   Text(
@@ -82,6 +86,32 @@ class DashboardScreen extends StatelessWidget {
         message: 'All sensor nodes report normal safety metrics.',
       );
     }
+  }
+
+  /// Displays the last time data was received from Firebase
+  Widget _buildLastUpdateTime(BuildContext context, MonitoringProvider provider) {
+    final now = DateTime.now();
+    final timeString = DateFormat('HH:mm:ss').format(now);
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Icon(
+          Icons.sync_rounded,
+          size: 14,
+          color: Theme.of(context).colorScheme.onSurface.withAlpha(120),
+        ),
+        const SizedBox(width: 6),
+        Text(
+          'Cập nhật: $timeString',
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            color: Theme.of(context).colorScheme.onSurface.withAlpha(150),
+          ),
+        ),
+      ],
+    );
   }
 
   /// Maps live database properties to color schemes and icons for individual cards
@@ -163,7 +193,7 @@ class DashboardScreen extends StatelessWidget {
         title: 'Fan Status',
         value: data.fanStatus ? 'ON' : 'OFF',
         unit: '',
-        icon: Icons.toys_rounded,
+        icon: Icons.cyclone_rounded,
         iconColor: Colors.indigoAccent,
         status: data.fanStatus ? 'RUNNING' : 'STOPPED',
         statusColor: data.fanStatus ? const Color(0xFF4CAF50) : Colors.grey,

@@ -174,7 +174,7 @@ class _ControlScreenState extends State<ControlScreen> with SingleTickerProvider
                                 return Transform.rotate(
                                   angle: _rotationController.value * 2 * math.pi,
                                   child: Icon(
-                                    Icons.toys_rounded,
+                                    Icons.cyclone_rounded,
                                     size: 34,
                                     color: isFanOn ? Colors.indigoAccent : Colors.grey,
                                   ),

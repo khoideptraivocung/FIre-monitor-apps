@@ -17,6 +17,7 @@ class MonitoringProvider extends ChangeNotifier {
   bool _prevFlameDetected = false;
   String _prevGasStatus = 'SAFE';
   bool? _prevFanStatus;
+  bool _prevHighTemp = false;
 
   FireData? get fireData => _fireData;
   bool get isLoading => _isLoading;
@@ -45,8 +46,8 @@ class MonitoringProvider extends ChangeNotifier {
     if (data.fireRisk && !_prevFireRisk) {
       await _notificationService.showNotification(
         id: 1,
-        title: 'Fire Alert Detected',
-        body: 'Please check your room immediately.',
+        title: 'CẢNH BÁO NGUY HIỂM',
+        body: 'Phát hiện nguy cơ cháy! Hãy kiểm tra ngay lập tức.',
       );
       await _dbService.writeLogEvent(
         'Fire Risk Detected',
@@ -59,8 +60,8 @@ class MonitoringProvider extends ChangeNotifier {
     if (data.flameDetected && !_prevFlameDetected) {
       await _notificationService.showNotification(
         id: 2,
-        title: 'Fire Alert Detected',
-        body: 'Please check your room immediately.',
+        title: 'CẢNH BÁO CHÁY',
+        body: 'Phát hiện ngọn lửa trong phòng! Hãy kiểm tra ngay.',
       );
       await _dbService.writeLogEvent(
         'Flame Detected',
@@ -73,8 +74,8 @@ class MonitoringProvider extends ChangeNotifier {
     if (data.gasStatus == 'WARNING' && _prevGasStatus != 'WARNING') {
       await _notificationService.showNotification(
         id: 3,
-        title: 'Gas Concentration Warning',
-        body: 'Elevated levels of smoke or gases detected by the MQ135 sensor.',
+        title: 'Cảnh báo nồng độ khí',
+        body: 'Phát hiện khói hoặc khí gas vượt ngưỡng an toàn.',
       );
       await _dbService.writeLogEvent(
         'Gas Warning',
@@ -83,8 +84,8 @@ class MonitoringProvider extends ChangeNotifier {
     } else if (data.gasStatus == 'DANGER' && _prevGasStatus != 'DANGER') {
       await _notificationService.showNotification(
         id: 4,
-        title: 'Gas Concentration Warning', // Set to warning as required, or custom danger title
-        body: 'Smoke or toxic gas concentrations reached dangerous thresholds.',
+        title: 'CẢNH BÁO KHÍ ĐỘC',
+        body: 'Nồng độ khói/khí gas ở mức NGUY HIỂM!',
       );
       await _dbService.writeLogEvent(
         'Gas Warning',
@@ -92,6 +93,17 @@ class MonitoringProvider extends ChangeNotifier {
       );
     }
     _prevGasStatus = data.gasStatus;
+
+    // 5. High Temperature Alert
+    bool isHighTemp = data.temperature >= 45;
+    if (isHighTemp && !_prevHighTemp) {
+      await _notificationService.showNotification(
+        id: 5,
+        title: 'Cảnh báo nhiệt độ cao',
+        body: 'Nhiệt độ phòng hiện tại là ${data.temperature.toStringAsFixed(1)}°C. Vui lòng chú ý.',
+      );
+    }
+    _prevHighTemp = isHighTemp;
 
     // 4. Exhaust Fan State Swapped
     if (_prevFanStatus != null && _prevFanStatus != data.fanStatus) {

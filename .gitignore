@@ -43,3 +43,13 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# --- Chặn file rác của firmware_bh (VS Code + PlatformIO) ---
+firmware_bh/.pio/
+firmware_bh/.vscode/.browse.c_cpp.db*
+firmware_bh/.vscode/c_cpp_properties.json
+firmware_bh/.vscode/launch.json
+firmware_bh/.vscode/ipch/
+firmware_bh/.vscode/.cmaketools.json
+firmware_bh/.gcc-flags.json
+firmware_bh/build/
